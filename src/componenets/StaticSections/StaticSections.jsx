@@ -26,7 +26,7 @@ const StaticSections = () => {
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeUp}
       >
-        <h2 className="text-4xl font-bold text-emerald-800 mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-emerald-800 mb-4">
           🌱 Why Go Green?
         </h2>
         <p className="text-gray-700 mb-10 text-lg">
@@ -89,7 +89,7 @@ const StaticSections = () => {
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeUp}
       >
-        <h2 className="text-4xl font-bold text-emerald-800 mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-emerald-800 mb-4">
           🌍 How It Works
         </h2>
         <p className="text-gray-700 mb-10 text-lg">

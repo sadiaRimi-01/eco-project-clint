@@ -58,9 +58,9 @@ const Banner = () => {
               transition={{ duration: 1 }}
             />
 
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black/40 backdrop-blur-sm px-6 py-6 rounded-2xl shadow-lg">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white  px-6 py-6 rounded-2xl shadow-lg">
               <motion.h2
-                className="text-2xl md:text-4xl font-bold mb-2"
+                className="text-base md:text-4xl font-bold mb-2"
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -69,7 +69,7 @@ const Banner = () => {
               </motion.h2>
 
               <motion.p
-                className="text-lg md:text-xl mb-4 text-gray-100"
+                className="text-[12px] md:text-xl mb-4 text-gray-100"
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -79,7 +79,7 @@ const Banner = () => {
               </motion.p>
 
               <motion.button
-                className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-2 rounded-full transition shadow-md"
+                className="bg-emerald-500 hover:bg-emerald-600 text-[12px] md:text-[18px] text-white font-semibold px-6 py-2 rounded-full transition shadow-md"
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"

@@ -23,12 +23,12 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
     <div className="max-w-full mx-auto py-10 px-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-xl md:text-5xl font-bold">
           Active <span className="text-emerald-500">Challenges</span>
         </h1>
         <Link
           to="/challenges"
-          className="btn text-white w-[145px] p-2 bg-gradient-to-r from-emerald-500 to-lime-500 hover:scale-105 transition-transform shadow-md rounded-full"
+          className="btn text-white w-[100px] md:w-[145px] p-2 bg-gradient-to-r from-emerald-500 to-lime-500 hover:scale-105 transition-transform shadow-md rounded-full"
         >
           Show All
         </Link>
