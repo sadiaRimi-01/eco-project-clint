@@ -8,7 +8,10 @@ const RootLayout = () => {
   return (
     <div>
       <Header></Header>
-      <Outlet />
+    <main className='max-w-screen-xl mx-auto w-full px-4 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 flex-1'>
+         <Outlet />
+    </main>
+
       <Footer></Footer>
     </div>
   );
