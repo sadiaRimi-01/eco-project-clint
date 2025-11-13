@@ -8,6 +8,7 @@ const Register = () => {
   const { createUser, updateUserProfile, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState('');
+  const [loading, setLoading] = useState(false); // 🔹 loading state
 
   useEffect(() => {
     document.title = 'Register';
@@ -15,6 +16,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setLoading(true); // 🔹 start loading
     const form = e.target;
     const name = form.name.value;
     const photoURL = form.photoURL.value;
@@ -25,8 +27,7 @@ const Register = () => {
     if (!/[A-Z]/.test(password)) return setPasswordError('Password must include at least one uppercase letter.');
     if (!/[a-z]/.test(password)) return setPasswordError('Password must include at least one lowercase letter.');
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) 
-  return setPasswordError('Password must include at least one special character.');
-
+      return setPasswordError('Password must include at least one special character.');
     if (password.length < 6) return setPasswordError('Password must be at least 6 characters long.');
 
     createUser(email, password)
@@ -55,10 +56,12 @@ const Register = () => {
           })
           .catch((err) => toast.error(`Error updating profile: ${err.message}`));
       })
-      .catch((err) => toast.error(`Error: ${err.message}`));
+      .catch((err) => toast.error(`Error: ${err.message}`))
+      .finally(() => setLoading(false)); // 🔹 stop loading
   };
 
   const handleGoogleLogin = () => {
+    setLoading(true);
     googleLogin()
       .then((result) => {
         const user = result.user;
@@ -80,7 +83,8 @@ const Register = () => {
             navigate('/');
           });
       })
-      .catch((err) => toast.error(`Error: ${err.message}`));
+      .catch((err) => toast.error(`Error: ${err.message}`))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -140,21 +144,26 @@ const Register = () => {
           />
           {passwordError && <p className="text-red-500 text-sm mb-2">{passwordError}</p>}
 
-          <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white w-full">
-            Register
+          <button
+            type="submit"
+            className="btn bg-green-600 hover:bg-green-700 text-white w-full"
+            disabled={loading} // 🔹 disable while loading
+          >
+            {loading ? 'Registering...' : 'Register'}
           </button>
 
           <button
             onClick={handleGoogleLogin}
             type="button"
             className="btn mt-3 bg-white text-gray-700 border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
+            disabled={loading} // 🔹 disable while loading
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="google"
               className="w-5 h-5"
             />
-            Register with Google
+            {loading ? 'Processing...' : 'Register with Google'}
           </button>
 
           <p className="pt-4 text-center text-gray-600">

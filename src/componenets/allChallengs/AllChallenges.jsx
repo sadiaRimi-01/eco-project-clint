@@ -1,5 +1,6 @@
 import React, { use, useState, useEffect } from "react";
 import ChallengeCard from "../challenge/ChallengeCard";
+import SkeletonLoader from "../SekeletonLoader";
 import { motion } from "framer-motion";
 
 const AllChallenges = ({ allChallengesPromise }) => {
@@ -8,19 +9,19 @@ const AllChallenges = ({ allChallengesPromise }) => {
   // 🌿 States for filtering
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   // 🌍 Get unique categories dynamically
-  const categories = ["All", ...new Set(allChallenges.map((ch) => ch.category))];
+  const categories = allChallenges ? ["All", ...new Set(allChallenges.map((ch) => ch.category))] : ["All"];
 
   // 🔍 Filter challenges
-  const filteredChallenges = allChallenges.filter((challenge) => {
-    const matchesSearch = challenge.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || challenge.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredChallenges = allChallenges
+    ? allChallenges.filter((challenge) => {
+        const matchesSearch = challenge.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory === "All" || challenge.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      })
+    : [];
 
   // ✅ Fix: Reset category when search is cleared
   useEffect(() => {
@@ -28,6 +29,11 @@ const AllChallenges = ({ allChallengesPromise }) => {
       setSelectedCategory("All");
     }
   }, [searchTerm]);
+
+  // ✅ Set loading false when allChallenges data is ready
+  useEffect(() => {
+    if (allChallenges) setLoading(false);
+  }, [allChallenges]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 py-10 px-6">
@@ -71,10 +77,10 @@ const AllChallenges = ({ allChallengesPromise }) => {
         </motion.div>
 
         {/* ♻️ Challenges Grid */}
-        {filteredChallenges.length === 0 ? (
-          <p className="text-center text-gray-600 text-lg mt-10">
-            No challenges found 😔
-          </p>
+        {loading ? (
+          <SkeletonLoader count={6} />
+        ) : filteredChallenges.length === 0 ? (
+          <p className="text-center text-gray-600 text-lg mt-10">No challenges found 😔</p>
         ) : (
           <motion.div
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

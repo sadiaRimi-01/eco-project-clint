@@ -1,6 +1,6 @@
 import React, { use } from 'react';
 import ChallengeCard from '../challenge/ChallengeCard';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import StaticSections from '../StaticSections/StaticSections';
 import SkeletonLoader from '../SekeletonLoader';
 import { motion } from 'framer-motion';
@@ -37,23 +37,27 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
 
       {/* Challenge Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {activeChallenge.map((challenge) => (
-          <motion.div
-            key={challenge._id}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <ChallengeCard challenge={challenge} />
-          </motion.div>
-        ))}
+        {activeChallenge.length === 0 ? (
+          <SkeletonLoader count={6} />
+        ) : (
+          activeChallenge.map((challenge) => (
+            <motion.div
+              key={challenge._id}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <ChallengeCard challenge={challenge} />
+            </motion.div>
+          ))
+        )}
       </div>
 
       {/* Static Sections */}
       <div className="mt-12">
-        <TipsEvents></TipsEvents>
+        <TipsEvents />
         <StaticSections />
       </div>
     </div>

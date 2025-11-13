@@ -8,6 +8,7 @@ const Login = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // 🔹 loading state
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -18,21 +19,25 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // 🔹 start loading
     loginUser(email, password)
       .then(() => {
         toast.success('Login Successful! 🎉');
         navigate(from, { replace: true });
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => toast.error(err.message))
+      .finally(() => setLoading(false)); // 🔹 stop loading
   };
 
   const handleGoogleLogin = () => {
+    setLoading(true);
     googleLogin()
       .then(() => {
         toast.success('Google Login Successful! 🌿');
         navigate(from, { replace: true });
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => toast.error(err.message))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -85,21 +90,26 @@ const Login = () => {
             </Link>
           </div>
 
-          <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white w-full">
-            Login
+          <button
+            type="submit"
+            className="btn bg-green-600 hover:bg-green-700 text-white w-full"
+            disabled={loading} // 🔹 disable while loading
+          >
+            {loading ? 'Logging in...' : 'Login'}
           </button>
 
           <button
             onClick={handleGoogleLogin}
             type="button"
             className="btn mt-3 bg-white text-gray-700 border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
+            disabled={loading} // 🔹 disable while loading
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="google"
               className="w-5 h-5"
             />
-            Login with Google
+            {loading ? 'Processing...' : 'Login with Google'}
           </button>
 
           <p className="pt-4 text-center text-gray-600">
