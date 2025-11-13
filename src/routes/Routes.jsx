@@ -9,6 +9,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ForgetPassword from "../pages/ForgetPassword";
 import Details from "../pages/Details";
+import Profile from "../pages/Profile";
+import UpdateProfile from "../pages/UpdateProfile";
 
 // ⚠️ Note: React Router v6 এ `element:` ব্যবহার হয়, `Component:` নয়
 
@@ -29,7 +31,11 @@ const router = createBrowserRouter([
       {
         path:"/challenges/:id",
         element:<Details></Details>
-      }
+      },
+      { path: "profile",
+         element: <Profile></Profile> },
+      { path: "profile/update", 
+        element: <UpdateProfile></UpdateProfile> },
     ],
   },
    {

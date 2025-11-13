@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import StaticSections from '../StaticSections/StaticSections';
 import SkeletonLoader from '../SekeletonLoader';
 import { motion } from 'framer-motion';
+import TipsEvents from '../TipsEvent';
 
 const ActiveChallenges = ({ activeChallengesPromise }) => {
   const activeChallenge = use(activeChallengesPromise);
@@ -52,6 +53,7 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
 
       {/* Static Sections */}
       <div className="mt-12">
+        <TipsEvents></TipsEvents>
         <StaticSections />
       </div>
     </div>

@@ -100,7 +100,7 @@ const Header = () => {
 
        
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-green-700"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -165,14 +165,14 @@ const Header = () => {
             <>
               <Link
                 to="/auth/login"
-                className="block py-1 hover:text-green-200"
+                className="block py-1 text-white hover:text-green-200"
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
                 to="/auth/register"
-                className="block py-1 hover:text-green-200"
+                className="block py-1 text-white hover:text-green-200"
                 onClick={() => setMenuOpen(false)}
               >
                 Register
