@@ -1,9 +1,17 @@
 import React from 'react';
+import AllChallenges from '../componenets/allChallengs/AllChallenges';
+const allChallengesPromise=fetch('http://localhost:3000/challenges')
+.then(res=> res.json());
+
 
 const Challanges = () => {
     return (
-        <div>
-            <h1>challanges</h1>
+       <div className="">
+           
+            <div className='max-w-full mx-auto'> 
+          
+           <AllChallenges  allChallengesPromise={allChallengesPromise}></AllChallenges>
+        </div>
         </div>
     );
 };

@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const ChallengeCard = ({challenge}) => {
-    const {title,category,impactMetric,imageUrl}=challenge;
+  const { title, category, impactMetric, imageUrl } = challenge;
+
+
     return (
         <div className="card bg-base-100  shadow-sm">
   <figure className='h-50 overflow-hidden'>
