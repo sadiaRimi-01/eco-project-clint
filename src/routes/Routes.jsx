@@ -11,40 +11,73 @@ import ForgetPassword from "../pages/ForgetPassword";
 import Details from "../pages/Details";
 import Profile from "../pages/Profile";
 import UpdateProfile from "../pages/UpdateProfile";
+import PrivateRoute from "../componenets/PrivateRoute";
 
-// ⚠️ Note: React Router v6 এ `element:` ব্যবহার হয়, `Component:` নয়
+// New pages
+import AddChallenge from "../pages/AddChallenge";
+import MyActivities from "../pages/MyActivities";
+import MyActivitiesDetails from "../pages/MyActivitiesDetails";
+import JoinChallenge from "../pages/JoinChalleng";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement:<ErrorPage></ErrorPage>,
-    element: <RootLayout />, // ✅ Component নয়, element হবে
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <Home /> },
+      { path: "challenges", element: <Challenges /> },
+      { path: "challenges/:id", element: <Details /> },
+
+      // ✅ Protected route: Add challenge
       {
-        index: true,
-        element: <Home />, // ✅ element
+        path: "challenges/add",
+        element: (
+          <PrivateRoute>
+           <AddChallenge></AddChallenge>
+          </PrivateRoute>
+        ),
+      },
+
+      // ✅ Protected route: Join challenge (you can create a JoinChallenge.jsx page)
+      {
+        path: "challenges/join/:id",
+        element: (
+          <PrivateRoute>
+           <JoinChallenge></JoinChallenge>
+          </PrivateRoute>
+        ),
+      },
+
+      { path: "profile", element: <Profile /> },
+      { path: "profile/update", element: <UpdateProfile /> },
+
+      // ✅ Protected routes: My Activities
+      {
+        path: "my-activities",
+        element: (
+          <PrivateRoute>
+            <MyActivities />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "challenges", // ✅ path spelling ঠিক করো
-        element: <Challenges />, // ✅ element
+        path: "my-activities/:id",
+        element: (
+          <PrivateRoute>
+            <MyActivitiesDetails />
+          </PrivateRoute>
+        ),
       },
-      {
-        path:"/challenges/:id",
-        element:<Details></Details>
-      },
-      { path: "profile",
-         element: <Profile></Profile> },
-      { path: "profile/update", 
-        element: <UpdateProfile></UpdateProfile> },
     ],
   },
-   {
+  {
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      { path: "login", element:<Login></Login> },
-      { path: "register", element: <Register></Register> },
-      { path: "forgot-password", element: <ForgetPassword></ForgetPassword> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      { path: "forgot-password", element: <ForgetPassword /> },
     ],
   },
 ]);
