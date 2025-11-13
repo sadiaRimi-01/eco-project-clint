@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <Challenges />, // ✅ element
       },
       {
-        path:"details",
+        path:"/challenges/:id",
         element:<Details></Details>
       }
     ],
