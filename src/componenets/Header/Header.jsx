@@ -6,6 +6,10 @@ import { AuthContext } from '../../provider/AuthProvider';
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false); 
+  const [hovering, setHovering] = useState(false);
+
+  const toggleDropdown = () => setUserMenuOpen(!userMenuOpen);
 
   return (
     <header className="bg-white text-green-600 sticky top-0 z-50 shadow-md">
@@ -22,18 +26,25 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
+       
         <nav className="hidden md:flex space-x-6">
           <Link to="/" className="hover:text-green-400 transition">Home</Link>
           <Link to="/challenges" className="hover:text-green-400 transition">Challenges</Link>
           {user && <Link to="/my-activities" className="hover:text-green-400 transition">My Activities</Link>}
         </nav>
 
-        {/* Desktop User/Login Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+       
+        <div className="hidden md:flex items-center gap-3 relative">
           {user ? (
-            <div className="relative group">
-              <button className="flex items-center gap-2">
+            <div
+              className="relative"
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
+            >
+              <button
+                className="flex items-center gap-2"
+                onClick={toggleDropdown} 
+              >
                 <img
                   src={user.photoURL || 'https://i.ibb.co.com/6Rc7hdTr/profile.jpg'}
                   alt="User Avatar"
@@ -42,16 +53,23 @@ const Header = () => {
                 <span className="font-medium">{user.displayName || "User"}</span>
               </button>
 
-              <div className="absolute right-0 mt-2 hidden group-hover:block bg-white text-gray-800 rounded-md shadow-lg w-44">
-                <Link to="/profile" className="block px-4 py-2 hover:bg-green-100">Profile</Link>
-                <Link to="/my-activities" className="block px-4 py-2 hover:bg-green-100">My Activities</Link>
-                <button
-                  onClick={logout}
-                  className="w-full text-left px-4 py-2 text-red-600 hover:bg-green-100"
+              {(hovering || userMenuOpen) && (
+                <div
+                  className="absolute right-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg w-44 z-50"
                 >
-                  Logout
-                </button>
-              </div>
+                  <Link to="/profile" className="block px-4 py-2 hover:bg-green-100">Profile</Link>
+                  <Link to="/my-activities" className="block px-4 py-2 hover:bg-green-100">My Activities</Link>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setUserMenuOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 text-red-600 hover:bg-green-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <>
@@ -71,7 +89,7 @@ const Header = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+       
         <button
           className="md:hidden text-green-700"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -80,7 +98,7 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      
       {menuOpen && (
         <div className="md:hidden bg-green-700 px-4 py-3 space-y-2">
           <Link to="/" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Home</Link>
@@ -95,11 +113,11 @@ const Header = () => {
                 <img
                   src={user.photoURL || 'https://i.ibb.co.com/6Rc7hdTr/profile.jpg'}
                   alt="User Avatar"
-                  className="w-8 h-8 rounded-full border border-white"
+                  className="w-8 h-8 rounded-full border  border-white"
                 />
-                <span>{user.displayName || "User"}</span>
+                <span className="text-white">{user.displayName || "User"}</span>
               </div>
-              <Link to="/profile" className="block py-1 hover:text-green-200" onClick={() => setMenuOpen(false)}>Profile</Link>
+              <Link to="/profile" className="block py-1 text-white hover:text-green-200" onClick={() => setMenuOpen(false)}>Profile</Link>
               <button
                 onClick={() => {
                   logout();
