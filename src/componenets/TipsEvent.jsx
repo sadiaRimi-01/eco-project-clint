@@ -23,7 +23,7 @@ const TipsEvents = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 py-10 px-6">
       <div className="max-w-7xl mx-auto">
 
-        {/* 🌿 Recent Tips */}
+      
         <h2 className="text-3xl font-bold text-green-700 mb-6">🌿 Recent Tips</h2>
         {loadingTips ? (
           <SkeletonLoader count={5} />
@@ -44,7 +44,7 @@ const TipsEvents = () => {
           </div>
         )}
 
-        {/* 📅 Upcoming Events */}
+       
         <h2 className="text-3xl font-bold text-green-700 mb-6">📅 Upcoming Events</h2>
         {loadingEvents ? (
           <SkeletonLoader count={4} />

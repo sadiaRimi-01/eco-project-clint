@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { Leaf, Users, Activity } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const LiveStats = () => {
   const [stats, setStats] = useState({ activeChallenges: 0, totalParticipants: 0 });
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -20,9 +24,18 @@ const LiveStats = () => {
     };
 
     fetchStats();
-    const interval = setInterval(fetchStats, 10000); // refresh every 10 seconds
+    const interval = setInterval(fetchStats, 10000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleAddChallenge = () => {
+    if (user) {
+      navigate("/challenges/add");
+    } else {
+     
+      navigate("/auth/login", { state: { from: "/challenges/add" } });
+    }
+  };
 
   if (loading) return <p className="text-center text-gray-600">Loading statistics...</p>;
 
@@ -40,7 +53,7 @@ const LiveStats = () => {
       variants={fadeUp}
     >
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto items-stretch">
-        {/* Left big card */}
+       
         <motion.div
           className="row-span-2 flex items-center justify-center"
           variants={fadeUp}
@@ -52,14 +65,22 @@ const LiveStats = () => {
               <h2 className="card-title text-3xl font-bold text-emerald-800">
                 Community Live Stats 🌱
               </h2>
-              <p className="text-gray-600 mt-2 text-lg">
+              <p className="text-gray-600 mt-2 text-lg mb-4">
                 Real-time sustainability progress powered by you!
               </p>
+
+             
+              <button
+                onClick={handleAddChallenge}
+                className="btn bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition mt-2"
+              >
+                Add New Challenge
+              </button>
             </div>
           </div>
         </motion.div>
 
-        {/* Right upper card - Active Challenges */}
+       
         <motion.div
           className="flex items-center justify-center"
           variants={fadeUp}
@@ -74,7 +95,7 @@ const LiveStats = () => {
           </div>
         </motion.div>
 
-        {/* Right lower card - Active Participants */}
+        
         <motion.div
           className="flex items-center justify-center"
           variants={fadeUp}

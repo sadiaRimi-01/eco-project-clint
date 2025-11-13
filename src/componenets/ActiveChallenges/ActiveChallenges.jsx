@@ -22,7 +22,7 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
 
   return (
     <div className="max-w-full mx-auto py-10 px-4">
-      {/* Header */}
+     
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-xl md:text-5xl font-bold">
           Active <span className="text-emerald-500">Challenges</span>
@@ -35,7 +35,7 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
         </Link>
       </div>
 
-      {/* Challenge Cards */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {activeChallenge.length === 0 ? (
           <SkeletonLoader count={6} />
@@ -55,7 +55,7 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
         )}
       </div>
 
-      {/* Static Sections */}
+      
       <div className="mt-12">
         <TipsEvents />
         <StaticSections />

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { AuthContext } from '../provider/AuthProvider';
 
 const AddChallenge = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +47,7 @@ const AddChallenge = () => {
         onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-3xl border border-green-200"
       >
-        <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">Add New Challenge 🌱</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-green-700 mb-6 text-center">Add New Challenge 🌱</h1>
 
         <label className="text-sm text-gray-700 font-medium">Title</label>
         <input type="text" name="title" required className="input input-bordered w-full mb-3 border-green-200 focus:border-green-500 focus:ring-green-100 rounded-lg" />

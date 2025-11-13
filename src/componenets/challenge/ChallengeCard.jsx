@@ -1,8 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react"; 
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const ChallengeCard = ({ challenge }) => {
   const { title, category, impactMetric, imageUrl, _id } = challenge;
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleJoinChallenge = () => {
+    if (user) {
+      navigate(`/challenges/join/${_id}`);
+    } else {
+      navigate("/auth/login", { state: { from: `/challenges/join/${_id}` } });
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 border border-emerald-200">
@@ -24,12 +35,22 @@ const ChallengeCard = ({ challenge }) => {
           <span className="text-emerald-600">{category}</span>
         </p>
 
-        <Link
-          to={`/challenges/${_id}`}
-          className="btn w-full bg-emerald-500 hover:bg-emerald-600 border-none text-white transition"
-        >
-          View Details
-        </Link>
+       
+        <div className="flex flex-col gap-2">
+          <Link
+            to={`/challenges/${_id}`}
+            className="btn w-full bg-emerald-500 hover:bg-emerald-600 border-none text-white transition"
+          >
+            View Details
+          </Link>
+
+          <button
+            onClick={handleJoinChallenge}
+            className="btn w-full bg-green-600 hover:bg-green-700 border-none text-white transition"
+          >
+            Join Challenge
+          </button>
+        </div>
       </div>
     </div>
   );

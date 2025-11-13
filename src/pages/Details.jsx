@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, Calendar, Clock } from "lucide-react";
-import PageSpinner from "../componenets/PageSpiner"; // Spinner component
+import PageSpinner from "../componenets/PageSpiner";
 
 const Details = () => {
   const { id } = useParams();
@@ -43,7 +43,7 @@ const Details = () => {
       transition={{ duration: 0.6 }}
       className="max-w-6xl mx-auto py-16 px-6"
     >
-      {/* Challenge Image */}
+     
       <div className="relative rounded-2xl overflow-hidden shadow-lg mb-8">
         <img
           src={challenge.imageUrl}
@@ -57,14 +57,14 @@ const Details = () => {
         </div>
       </div>
 
-      {/* Challenge Info */}
+    
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         className="grid md:grid-cols-2 gap-8 mb-10"
       >
-        {/* Left Info */}
+       
         <div className="space-y-4">
           <p className="text-gray-700 text-lg">{challenge.description}</p>
           <p className="text-gray-800 font-semibold">
@@ -83,7 +83,7 @@ const Details = () => {
           </p>
         </div>
 
-        {/* Right Stats Card */}
+        
         <div className="bg-emerald-50 rounded-2xl p-6 shadow-md flex flex-col gap-4 justify-center">
           <div className="flex items-center gap-3 text-gray-800">
             <Calendar className="w-5 h-5 text-green-600" />
@@ -107,7 +107,7 @@ const Details = () => {
         </div>
       </motion.div>
 
-      {/* Join Button */}
+     
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

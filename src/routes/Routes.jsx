@@ -13,7 +13,7 @@ import Profile from "../pages/Profile";
 import UpdateProfile from "../pages/UpdateProfile";
 import PrivateRoute from "../componenets/PrivateRoute";
 
-// New pages
+
 import AddChallenge from "../pages/AddChallenge";
 import MyActivities from "../pages/MyActivities";
 import MyActivitiesDetails from "../pages/MyActivitiesDetails";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       { path: "challenges", element: <Challenges /> },
       { path: "challenges/:id", element: <Details /> },
 
-      // ✅ Protected route: Add challenge
+     
       {
         path: "challenges/add",
         element: (
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         ),
       },
 
-      // ✅ Protected route: Join challenge (you can create a JoinChallenge.jsx page)
+     
       {
         path: "challenges/join/:id",
         element: (
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "profile/update", element: <UpdateProfile /> },
 
-      // ✅ Protected routes: My Activities
+     
       {
         path: "my-activities",
         element: (

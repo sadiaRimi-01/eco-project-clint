@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 const AllChallenges = ({ allChallengesPromise }) => {
   const allChallenges = use(allChallengesPromise);
 
-  // 🌿 States for filtering
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // 🌍 Get unique categories dynamically
+ 
   const categories = ["All", ...new Set(allChallenges.map((ch) => ch.category))];
 
-  // 🔍 Filter challenges
+  
   const filteredChallenges = allChallenges.filter((challenge) => {
     const matchesSearch = challenge.title
       .toLowerCase()
@@ -22,7 +22,7 @@ const AllChallenges = ({ allChallengesPromise }) => {
     return matchesSearch && matchesCategory;
   });
 
-  // ✅ Fix: Reset category when search is cleared
+ 
   useEffect(() => {
     if (searchTerm === "") {
       setSelectedCategory("All");
@@ -32,7 +32,7 @@ const AllChallenges = ({ allChallengesPromise }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 py-10 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* 🌿 Header */}
+       
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ const AllChallenges = ({ allChallengesPromise }) => {
           🌍 Explore All Eco Challenges
         </motion.h1>
 
-        {/* 🔍 Search & Filter Bar */}
+       
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ const AllChallenges = ({ allChallengesPromise }) => {
           </select>
         </motion.div>
 
-        {/* ♻️ Challenges Grid */}
+       
         {filteredChallenges.length === 0 ? (
           <p className="text-center text-gray-600 text-lg mt-10">
             No challenges found 😔

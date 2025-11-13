@@ -18,7 +18,7 @@ const fadeUp = {
 const StaticSections = () => {
   return (
     <div className="bg-gradient-to-b from-green-50 to-emerald-100 py-16 px-6 text-center overflow-hidden">
-      {/* Section 1: Why Go Green */}
+      
       <motion.div
         className="max-w-6xl mx-auto mb-20"
         initial="hidden"
@@ -35,7 +35,7 @@ const StaticSections = () => {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Benefit 1 */}
+         
           <motion.div
             variants={fadeUp}
             className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1"
@@ -49,7 +49,7 @@ const StaticSections = () => {
             </p>
           </motion.div>
 
-          {/* Benefit 2 */}
+          
           <motion.div
             variants={fadeUp}
             transition={{ delay: 0.2 }}
@@ -64,7 +64,7 @@ const StaticSections = () => {
             </p>
           </motion.div>
 
-          {/* Benefit 3 */}
+          
           <motion.div
             variants={fadeUp}
             transition={{ delay: 0.4 }}
@@ -81,7 +81,7 @@ const StaticSections = () => {
         </div>
       </motion.div>
 
-      {/* Section 2: How It Works */}
+     
       <motion.div
         className="max-w-6xl mx-auto"
         initial="hidden"
@@ -97,7 +97,7 @@ const StaticSections = () => {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Step 1 */}
+         
           <motion.div
             variants={fadeUp}
             className="relative p-8 bg-white rounded-2xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1"
@@ -114,7 +114,7 @@ const StaticSections = () => {
             </p>
           </motion.div>
 
-          {/* Step 2 */}
+        
           <motion.div
             variants={fadeUp}
             transition={{ delay: 0.2 }}
@@ -132,7 +132,7 @@ const StaticSections = () => {
             </p>
           </motion.div>
 
-          {/* Step 3 */}
+         
           <motion.div
             variants={fadeUp}
             transition={{ delay: 0.4 }}

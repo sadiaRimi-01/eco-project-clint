@@ -8,7 +8,7 @@ const Login = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // 🔹 loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -19,14 +19,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // 🔹 start loading
+    setLoading(true); 
     loginUser(email, password)
       .then(() => {
         toast.success('Login Successful! 🎉');
         navigate(from, { replace: true });
       })
       .catch((err) => toast.error(err.message))
-      .finally(() => setLoading(false)); // 🔹 stop loading
+      .finally(() => setLoading(false));
   };
 
   const handleGoogleLogin = () => {
@@ -93,7 +93,7 @@ const Login = () => {
           <button
             type="submit"
             className="btn bg-green-600 hover:bg-green-700 text-white w-full"
-            disabled={loading} // 🔹 disable while loading
+            disabled={loading}
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
@@ -102,7 +102,7 @@ const Login = () => {
             onClick={handleGoogleLogin}
             type="button"
             className="btn mt-3 bg-white text-gray-700 border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
-            disabled={loading} // 🔹 disable while loading
+            disabled={loading}
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"

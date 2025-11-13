@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom'; // ✅ এখানে 'react-router' না, 'react-router-dom' হবে
+import { Outlet } from 'react-router-dom';
 import Header from '../componenets/Header/Header';
 import Footer from '../componenets/Footer/Footer';
 

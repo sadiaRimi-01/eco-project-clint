@@ -8,83 +8,104 @@ const Register = () => {
   const { createUser, updateUserProfile, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState('');
-  const [loading, setLoading] = useState(false); // 🔹 loading state
+  const [loadingRegister, setLoadingRegister] = useState(false);
+  const [loadingGoogle, setLoadingGoogle] = useState(false);
 
   useEffect(() => {
     document.title = 'Register';
   }, []);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true); // 🔹 start loading
+    setPasswordError('');
+    setLoadingRegister(true);
+
     const form = e.target;
     const name = form.name.value;
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    setPasswordError('');
 
-    if (!/[A-Z]/.test(password)) return setPasswordError('Password must include at least one uppercase letter.');
-    if (!/[a-z]/.test(password)) return setPasswordError('Password must include at least one lowercase letter.');
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) 
-      return setPasswordError('Password must include at least one special character.');
-    if (password.length < 6) return setPasswordError('Password must be at least 6 characters long.');
+    
+    if (!/[A-Z]/.test(password)) {
+      setPasswordError('Password must include at least one uppercase letter.');
+      setLoadingRegister(false);
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setPasswordError('Password must include at least one lowercase letter.');
+      setLoadingRegister(false);
+      return;
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      setPasswordError('Password must include at least one special character.');
+      setLoadingRegister(false);
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long.');
+      setLoadingRegister(false);
+      return;
+    }
 
-    createUser(email, password)
-      .then((firebaseUserCredential) => {
-        const firebaseUser = firebaseUserCredential.user;
-        updateUserProfile(name, photoURL)
-          .then(() => {
-            const newUser = {
-              name: name,
-              email: firebaseUser.email,
-              image: photoURL,
-              createdAt: new Date().toISOString(),
-            };
+    try {
+      const firebaseUserCredential = await createUser(email, password);
+      const firebaseUser = firebaseUserCredential.user;
 
-            fetch('http://localhost:3000/users', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(newUser),
-            })
-              .then((res) => res.json())
-              .then(() => {
-                toast.success('Registration successful! 🎉');
-                navigate('/');
-              })
-              .catch(() => toast.error('User created in Firebase but not saved to MongoDB'));
-          })
-          .catch((err) => toast.error(`Error updating profile: ${err.message}`));
-      })
-      .catch((err) => toast.error(`Error: ${err.message}`))
-      .finally(() => setLoading(false)); // 🔹 stop loading
+      await updateUserProfile(name, photoURL);
+
+      const newUser = {
+        name,
+        email: firebaseUser.email,
+        image: photoURL,
+        createdAt: new Date().toISOString(),
+      };
+
+      const res = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!res.ok) throw new Error('User created in Firebase but not saved to MongoDB');
+
+      toast.success('Registration successful! 🎉');
+      navigate('/');
+    } catch (err) {
+      toast.error(err.message || 'Registration failed');
+    } finally {
+      setLoadingRegister(false);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    setLoading(true);
-    googleLogin()
-      .then((result) => {
-        const user = result.user;
-        const googleUser = {
-          name: user.displayName,
-          email: user.email,
-          image: user.photoURL,
-          createdAt: new Date().toISOString(),
-        };
+  const handleGoogleLogin = async () => {
+    setLoadingGoogle(true);
+    try {
+      const result = await googleLogin();
+      const user = result.user;
 
-        fetch('http://localhost:3000/users', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(googleUser),
-        })
-          .then((res) => res.json())
-          .then(() => {
-            toast.success('Logged in with Google successfully! 🌿');
-            navigate('/');
-          });
-      })
-      .catch((err) => toast.error(`Error: ${err.message}`))
-      .finally(() => setLoading(false));
+      const googleUser = {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL,
+        createdAt: new Date().toISOString(),
+      };
+
+      const res = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(googleUser),
+      });
+
+      if (!res.ok) throw new Error('Failed to save Google user');
+
+      toast.success('Logged in with Google successfully! 🌿');
+      navigate('/');
+    } catch (err) {
+      toast.error(err.message || 'Google login failed');
+    } finally {
+      setLoadingGoogle(false);
+    }
   };
 
   return (
@@ -147,23 +168,23 @@ const Register = () => {
           <button
             type="submit"
             className="btn bg-green-600 hover:bg-green-700 text-white w-full"
-            disabled={loading} // 🔹 disable while loading
+            disabled={loadingRegister}
           >
-            {loading ? 'Registering...' : 'Register'}
+            {loadingRegister ? 'Registering...' : 'Register'}
           </button>
 
           <button
             onClick={handleGoogleLogin}
             type="button"
             className="btn mt-3 bg-white text-gray-700 border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
-            disabled={loading} // 🔹 disable while loading
+            disabled={loadingGoogle}
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="google"
               className="w-5 h-5"
             />
-            {loading ? 'Processing...' : 'Register with Google'}
+            {loadingGoogle ? 'Processing...' : 'Register with Google'}
           </button>
 
           <p className="pt-4 text-center text-gray-600">
