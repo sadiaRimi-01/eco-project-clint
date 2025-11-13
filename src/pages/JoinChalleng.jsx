@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../provider/AuthProvider';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../provider/AuthProvider';
 
 const JoinChallenge = () => {
   const { user } = useContext(AuthContext);
