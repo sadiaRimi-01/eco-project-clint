@@ -3,7 +3,7 @@ import ActiveChallenges from '../componenets/ActiveChallenges/ActiveChallenges';
 import Banner from '../componenets/banner/Banner';
 import LiveStats from '../componenets/LiveStats/LiveStats';
 
-const activeChallengesPromise=fetch('http://localhost:3000/ActiveChallenges')
+const activeChallengesPromise=fetch('https://ecotrack-virid.vercel.app/ActiveChallenges')
 .then(res=> res.json());
 
 const Home = () => {

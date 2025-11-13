@@ -13,7 +13,7 @@ const LiveStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch("http://localhost:3000/stats");
+        const res = await fetch("https://ecotrack-virid.vercel.app/stats");
         const data = await res.json();
         setStats(data);
       } catch (err) {

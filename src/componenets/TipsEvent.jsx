@@ -10,11 +10,11 @@ const TipsEvents = () => {
   const [loadingEvents, setLoadingEvents] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/tips')
+    axios.get('https://ecotrack-virid.vercel.app/tips')
       .then(res => setTips(res.data))
       .finally(() => setLoadingTips(false));
 
-    axios.get('http://localhost:3000/events')
+    axios.get('https://ecotrack-virid.vercel.app/events')
       .then(res => setEvents(res.data))
       .finally(() => setLoadingEvents(false));
   }, []);

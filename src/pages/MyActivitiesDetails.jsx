@@ -21,12 +21,12 @@ const MyActivitiesDetails = () => {
 
     const fetchActivity = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/userChallenges/${user.uid}`);
+        const res = await axios.get(`https://ecotrack-virid.vercel.app/userChallenges/${user.uid}`);
         const act = res.data.find(c => c.challengeId === id);
 
         if (act) {
          
-          const challengeRes = await axios.get(`http://localhost:3000/challenges/${id}`);
+          const challengeRes = await axios.get(`https://ecotrack-virid.vercel.app/challenges/${id}`);
           setActivity({ ...act, challengeTitle: challengeRes.data.title, challengeDescription: challengeRes.data.description });
         } else {
           setActivity(null);
@@ -49,7 +49,7 @@ const MyActivitiesDetails = () => {
   const handleUpdate = async () => {
     setUpdating(true);
     try {
-      await axios.patch(`http://localhost:3000/userChallenges/${user.uid}/${id}`, { progress: activity.progress });
+      await axios.patch(`https://ecotrack-virid.vercel.app/userChallenges/${user.uid}/${id}`, { progress: activity.progress });
       toast.success('Progress updated! 🌱');
     } catch (err) {
       toast.error('Failed to update progress');

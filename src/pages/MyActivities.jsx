@@ -19,14 +19,14 @@ const MyActivities = () => {
       try {
         setLoading(true);
        
-        const res = await axios.get(`http://localhost:3000/userChallenges/${user.uid}`);
+        const res = await axios.get(`https://ecotrack-virid.vercel.app/userChallenges/${user.uid}`);
         const userChallenges = res.data;
 
       
         const activitiesWithDetails = await Promise.all(
           userChallenges.map(async (act) => {
             try {
-              const challengeRes = await axios.get(`http://localhost:3000/challenges/${act.challengeId}`);
+              const challengeRes = await axios.get(`https://ecotrack-virid.vercel.app/challenges/${act.challengeId}`);
               return {
                 ...act,
                 challengeTitle: challengeRes.data.title,
@@ -52,7 +52,7 @@ const MyActivities = () => {
   const handleCancel = async (challengeId) => {
     setCancellingId(challengeId);
     try {
-      await axios.delete(`http://localhost:3000/userChallenges/${user.uid}/${challengeId}`);
+      await axios.delete(`https://ecotrack-virid.vercel.app/userChallenges/${user.uid}/${challengeId}`);
       setActivities(prev => prev.filter(act => act.challengeId !== challengeId));
       toast.success('Challenge canceled successfully 🌿');
     } catch (err) {

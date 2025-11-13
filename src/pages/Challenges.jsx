@@ -1,6 +1,6 @@
 import React from 'react';
 import AllChallenges from '../componenets/allChallengs/AllChallenges';
-const allChallengesPromise=fetch('http://localhost:3000/challenges')
+const allChallengesPromise=fetch('https://ecotrack-virid.vercel.app/challenges')
 .then(res=> res.json());
 
 

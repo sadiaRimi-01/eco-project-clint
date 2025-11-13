@@ -28,7 +28,7 @@ const AddChallenge = () => {
       createdAt: new Date().toISOString()
     };
 
-    axios.post('http://localhost:3000/challenges', newChallenge)
+    axios.post('https://ecotrack-virid.vercel.app/challenges', newChallenge)
       .then(() => {
         toast.success('Challenge created successfully! 🌿');
         navigate('/challenges');

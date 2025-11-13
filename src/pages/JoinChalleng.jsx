@@ -19,12 +19,12 @@ const JoinChallenge = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/challenges/${id}`)
+      .get(`https://ecotrack-virid.vercel.app/challenges/${id}`)
       .then(res => setChallenge(res.data))
       .finally(() => setLoading(false));
 
     if (user) {
-      axios.get(`http://localhost:3000/userChallenges/${user?.uid}`)
+      axios.get(`https://ecotrack-virid.vercel.app/userChallenges/${user?.uid}`)
         .then(res => {
           const uc = res.data.find(c => c.challengeId === id);
           if (uc) {
@@ -42,7 +42,7 @@ const JoinChallenge = () => {
     }
 
     setJoining(true);
-    axios.post(`http://localhost:3000/challenges/join/${id}`, { userId: user.uid })
+    axios.post(`https://ecotrack-virid.vercel.app/challenges/join/${id}`, { userId: user.uid })
       .then(res => {
         toast.success('Joined Successfully! 🎉');
         setJoined(true);

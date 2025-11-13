@@ -61,7 +61,7 @@ const Register = () => {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch('http://localhost:3000/users', {
+      const res = await fetch('https://ecotrack-virid.vercel.app/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
@@ -91,7 +91,7 @@ const Register = () => {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch('http://localhost:3000/users', {
+      const res = await fetch('https://ecotrack-virid.vercel.app/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(googleUser),
