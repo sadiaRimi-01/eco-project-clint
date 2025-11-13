@@ -1,16 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Challenges", path: "/challenges" },
-  ];
 
   return (
     <header className="bg-white text-green-600 sticky top-0 z-50 shadow-md">
@@ -27,37 +22,14 @@ const Header = () => {
           </span>
         </Link>
 
-       
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              className={({ isActive }) =>
-                `hover:text-green-400 transition ${
-                  isActive ? "border-b-2 border-green-600 pb-1" : ""
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
-
-          {user && (
-            <NavLink
-              to="/my-activities"
-              className={({ isActive }) =>
-                `hover:text-green-400 transition ${
-                  isActive ? "border-b-2 border-green-600 pb-1" : ""
-                }`
-              }
-            >
-              My Activities
-            </NavLink>
-          )}
+          <Link to="/" className="hover:text-green-400 transition">Home</Link>
+          <Link to="/challenges" className="hover:text-green-400 transition">Challenges</Link>
+          {user && <Link to="/my-activities" className="hover:text-green-400 transition">My Activities</Link>}
         </nav>
 
-       
+        {/* Desktop User/Login Buttons */}
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <div className="relative group">
@@ -99,7 +71,7 @@ const Header = () => {
           )}
         </div>
 
-       
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-green-700"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -108,37 +80,12 @@ const Header = () => {
         </button>
       </div>
 
-      
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-green-700 px-4 py-3 space-y-2">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                `block py-1 ${
-                  isActive ? "text-green-200 font-semibold" : "text-white"
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
-
-          {user && (
-            <NavLink
-              to="/my-activities"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                `block py-1 ${
-                  isActive ? "text-green-200 font-semibold" : "text-white"
-                }`
-              }
-            >
-              My Activities
-            </NavLink>
-          )}
+          <Link to="/" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Home</Link>
+          <Link to="/challenges" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Challenges</Link>
+          {user && <Link to="/my-activities" onClick={() => setMenuOpen(false)} className="block py-1 text-white">My Activities</Link>}
 
           <div className="border-t border-green-500 my-2"></div>
 
