@@ -128,8 +128,7 @@ const Header = () => {
             </>
           )}
         </div>
-
-       
+ 
         <button
           className="md:hidden text-green-700"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -145,6 +144,11 @@ const Header = () => {
           <Link to="/challenges" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Challenges</Link>
           {user && <Link to="/my-activities" onClick={() => setMenuOpen(false)} className="block py-1 text-white">My Activities</Link>
           }
+          {user && (
+  <Link to="/dashboard" className="lock py-1 text-white transition">
+    Dashboard
+  </Link>
+)}
           <Link to="/about" onClick={() => setMenuOpen(false)} className="block py-1 text-white">About Us</Link>
           <Link to="/terms" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Terms And Privacy</Link>
 
@@ -176,6 +180,7 @@ const Header = () => {
               <Link to="/auth/login" className="block py-1 text-white hover:text-green-200" onClick={() => setMenuOpen(false)}>Login</Link>
               <Link to="/auth/register" className="block py-1 text-white hover:text-green-200" onClick={() => setMenuOpen(false)}>Register</Link>
             </>
+            
           )}
         </div>
       )}
