@@ -1,2 +1,24 @@
 @import "tailwindcss";
 @plugin "daisyui";
+/* Light theme gradient */
+[data-theme="light"] .eco-bg {
+  background-image: linear-gradient(
+    to bottom right,
+    #ecfdf5,
+    #d1fae5,
+    #a7f3d0
+  );
+}
+
+/* Dark theme white bg */
+[data-theme="ecotrackdark"] .eco-bg {
+  background-color: black;
+}
+[data-theme="light"] .eco-fot {
+ background-color:green;
+}
+
+/* Dark theme white bg */
+[data-theme="ecotrackdark"] .eco-nav {
+  background-color: black;
+}

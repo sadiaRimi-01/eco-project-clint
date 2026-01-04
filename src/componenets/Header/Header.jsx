@@ -1,18 +1,43 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
+   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false); 
   const [hovering, setHovering] = useState(false);
 
   const toggleDropdown = () => setUserMenuOpen(!userMenuOpen);
 
+// -----------------
+  // Theme state
+  const [isDark, setIsDark] = useState(false);
+
+  // Initialize theme only once on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      setIsDark(savedTheme === "ecotrackdark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      setIsDark(false);
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = isDark ? "light" : "ecotrackdark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    setIsDark(!isDark);
+  };
   return (
-    <header className="bg-white text-green-600 sticky top-0 z-50 shadow-md">
+    <header className="bg-base-100 text-green-600 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
        
         <Link to="/" className="flex items-center gap-2">
@@ -27,14 +52,44 @@ const Header = () => {
         </Link>
 
        
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden md:flex text-[12px] lg:text-[16px] space-x-2 lg:space-x-6">
           <Link to="/" className="hover:text-green-400 transition">Home</Link>
           <Link to="/challenges" className="hover:text-green-400 transition">Challenges</Link>
           {user && <Link to="/my-activities" className="hover:text-green-400 transition">My Activities</Link>}
+          <Link to="/about">About Us</Link>
+          <Link to="/terms">Terms And Privacy</Link>
         </nav>
+        
 
        
         <div className="hidden md:flex items-center gap-3 relative">
+          {/* 🌗 THEME TOGGLE */}
+          <label className="swap swap-rotate">
+            <input
+              type="checkbox"
+               checked={isDark}
+              onChange={toggleTheme}
+              className="theme-controller"
+              value="dark"
+            />
+
+            {/* Sun */}
+            <svg
+              className="swap-off h-8 w-8 fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24">
+              <path d="M12 6.5A5.5 5.5 0 1 0 17.5 12 5.51 5.51 0 0 0 12 6.5Z" />
+            </svg>
+
+            {/* Moon */}
+            <svg
+              className="swap-on h-8 w-8 fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24">
+              <path d="M21.64 13A8.1 8.1 0 1 1 11 2.36a8.1 8.1 0 0 0 10.64 10.64Z" />
+            </svg>
+          </label>
+
           {user ? (
             <div
               className="relative"
@@ -103,7 +158,10 @@ const Header = () => {
         <div className="md:hidden bg-green-700 px-4 py-3 space-y-2">
           <Link to="/" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Home</Link>
           <Link to="/challenges" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Challenges</Link>
-          {user && <Link to="/my-activities" onClick={() => setMenuOpen(false)} className="block py-1 text-white">My Activities</Link>}
+          {user && <Link to="/my-activities" onClick={() => setMenuOpen(false)} className="block py-1 text-white">My Activities</Link>
+          }
+          <Link to="/about" onClick={() => setMenuOpen(false)} className="block py-1 text-white">About Us</Link>
+          <Link to="/terms" onClick={() => setMenuOpen(false)} className="block py-1 text-white">Terms And Privacy</Link>
 
           <div className="border-t border-green-500 my-2"></div>
 

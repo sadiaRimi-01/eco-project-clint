@@ -45,12 +45,12 @@ const Login = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-green-100 to-green-200"
+      className="min-h-screen flex items-center justify-center eco-bg"
     >
       <div className="flex flex-col lg:flex-row-reverse items-center gap-10 w-full max-w-5xl px-6">
         <div className="lg:w-1/2 text-center lg:text-left">
           <h1 className="text-5xl font-extrabold text-green-700">Welcome Back 👋</h1>
-          <p className="py-6 text-gray-600 text-lg">
+          <p className="py-6 text-base-content text-lg">
             Log in to continue your eco-friendly journey and track your challenges 🌍
           </p>
         </div>
@@ -101,7 +101,7 @@ const Login = () => {
           <button
             onClick={handleGoogleLogin}
             type="button"
-            className="btn mt-3 bg-white text-gray-700 border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
+            className="btn mt-3 bg-base-100 text-base-content border border-gray-300 hover:bg-green-50 w-full flex gap-2 items-center justify-center"
             disabled={loading}
           >
             <img
@@ -112,7 +112,7 @@ const Login = () => {
             {loading ? 'Processing...' : 'Login with Google'}
           </button>
 
-          <p className="pt-4 text-center text-gray-600">
+          <p className="pt-4 text-center text-base-content">
             Don't have an account?{' '}
             <Link to="/auth/register" className="text-green-700 font-semibold hover:underline">
               Register

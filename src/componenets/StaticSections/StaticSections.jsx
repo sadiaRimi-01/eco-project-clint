@@ -17,10 +17,10 @@ const fadeUp = {
 
 const StaticSections = () => {
   return (
-    <div className="bg-gradient-to-b from-green-50 to-emerald-100 py-16 px-6 text-center overflow-hidden">
+    <div className="bg-gradient-to-b from-green-50 to-emerald-100 py-16 px-6 text-center overflow-hidden rounded-2xl shadow-lg">
       
       <motion.div
-        className="max-w-6xl mx-auto mb-20"
+        className="max-w-6xl mx-auto mb-20 "
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

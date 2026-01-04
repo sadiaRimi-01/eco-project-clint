@@ -21,7 +21,7 @@ const ActiveChallenges = ({ activeChallengesPromise }) => {
   }
 
   return (
-    <div className="max-w-full mx-auto py-10 px-4">
+    <div className="max-w-full mx-auto py-10 px-4 ">
      
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-xl md:text-5xl font-bold">

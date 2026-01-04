@@ -66,20 +66,20 @@ const Details = () => {
       >
        
         <div className="space-y-4">
-          <p className="text-gray-700 text-lg">{challenge.description}</p>
-          <p className="text-gray-800 font-semibold">
+          <p className="text-base-content text-[14px] md:text-lg">{challenge.description}</p>
+          <p className="text-base-content font-semibold">
             Impact Metric:{" "}
-            <span className="font-normal text-gray-600">
+            <span className="font-normal text-base-content">
               {challenge.impactMetric}
             </span>
           </p>
-          <p className="text-gray-800 font-semibold">
+          <p className="text-base-content font-semibold">
             Target:{" "}
-            <span className="font-normal text-gray-600">{challenge.target}</span>
+            <span className="font-normal text-base-content">{challenge.target}</span>
           </p>
-          <p className="text-gray-800 font-semibold">
+          <p className="text-base-content font-semibold">
             Category:{" "}
-            <span className="font-normal text-gray-600">{challenge.category}</span>
+            <span className="font-normal text-base-content">{challenge.category}</span>
           </p>
         </div>
 

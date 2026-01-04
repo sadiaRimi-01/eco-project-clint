@@ -2,6 +2,7 @@ import React from 'react';
 import ActiveChallenges from '../componenets/ActiveChallenges/ActiveChallenges';
 import Banner from '../componenets/banner/Banner';
 import LiveStats from '../componenets/LiveStats/LiveStats';
+import Newsletter from '../componenets/Newsletter';
 
 const activeChallengesPromise=fetch('https://ecotrack-virid.vercel.app/ActiveChallenges')
 .then(res=> res.json());
@@ -14,6 +15,7 @@ const Home = () => {
             <div className='max-w-full mx-auto'> 
            <ActiveChallenges activeChallengesPromise={activeChallengesPromise}></ActiveChallenges>
         </div>
+        <Newsletter></Newsletter>
         </div>
         
     );

@@ -113,12 +113,12 @@ const Register = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-green-100 to-green-200"
+      className="min-h-screen flex items-center justify-center eco-bg"
     >
       <div className="flex flex-col lg:flex-row-reverse items-center gap-10 w-full max-w-5xl px-6">
         <div className="lg:w-1/2 text-center lg:text-left">
           <h1 className="text-5xl font-extrabold text-green-700">Join EcoTrack 🌱</h1>
-          <p className="py-6 text-gray-600 text-lg">
+          <p className="py-6 text-base-content text-lg">
             Create your account and start making a difference for the planet 💚
           </p>
         </div>

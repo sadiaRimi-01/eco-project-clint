@@ -8,7 +8,8 @@ const AllChallenges = ({ allChallengesPromise }) => {
   
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-
+ const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
  
   const categories = ["All", ...new Set(allChallenges.map((ch) => ch.category))];
 
@@ -28,9 +29,16 @@ const AllChallenges = ({ allChallengesPromise }) => {
       setSelectedCategory("All");
     }
   }, [searchTerm]);
+   // ✅ PAGINATION LOGIC (NEW)
+  const totalPages = Math.ceil(filteredChallenges.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedChallenges = filteredChallenges.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 py-10 px-6">
+    <div className="min-h-screen  py-10 px-6">
       <div className="max-w-7xl mx-auto">
        
         <motion.h1
@@ -88,7 +96,7 @@ const AllChallenges = ({ allChallengesPromise }) => {
               },
             }}
           >
-            {filteredChallenges.map((challenge) => (
+            {/* {filteredChallenges.map((challenge) => (
               <motion.div
                 key={challenge._id}
                 variants={{
@@ -101,8 +109,43 @@ const AllChallenges = ({ allChallengesPromise }) => {
                 <ChallengeCard challenge={challenge} />
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
+           {paginatedChallenges.map((challenge) => (
+                <motion.div
+                  key={challenge._id}
+                  variants={{
+                    hidden: { opacity: 0, y: 60 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <ChallengeCard challenge={challenge} />
+                </motion.div>
+              ))}
+            </motion.div>
+          
         )}
+          {/* ✅ PAGINATION UI (EXACT DESIGN YOU GAVE) */}
+            <div className="flex justify-center mt-12">
+              <div className="join grid grid-cols-2">
+                <button
+                  className="join-item btn btn-outline"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((prev) => prev - 1)}
+                >
+                  Previous page
+                </button>
+
+                <button
+                  className="join-item btn btn-outline"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
       </div>
     </div>
   );

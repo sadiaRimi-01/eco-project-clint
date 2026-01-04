@@ -18,6 +18,8 @@ import AddChallenge from "../pages/AddChallenge";
 import MyActivities from "../pages/MyActivities";
 import MyActivitiesDetails from "../pages/MyActivitiesDetails";
 import JoinChallenge from "../pages/JoinChalleng";
+import TermsPrivacy from "../pages/TermsPrivacy";
+import About from "../pages/About";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,15 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "challenges", element: <Challenges /> },
       { path: "challenges/:id", element: <Details /> },
-
+      {
+        path:"about",
+        element:<About></About>
+      },
+      {
+        path:"terms",
+        element:<TermsPrivacy></TermsPrivacy>
+      }
+,
      
       {
         path: "challenges/add",

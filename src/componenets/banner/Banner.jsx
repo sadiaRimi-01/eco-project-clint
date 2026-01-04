@@ -45,14 +45,14 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative ">
             <motion.img
               src={slide.image}
               alt={slide.heading}
-              className="w-full h-[350px] md:h-[450px] object-cover"
+              className="w-full h-[350px] md:h-[450px] rounded-2xl shadow-lg object-cover"
               initial={{ scale: 1.05, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1 }}
