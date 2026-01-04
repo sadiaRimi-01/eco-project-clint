@@ -11,7 +11,7 @@ const ProfileContent = () => {
     }, []);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-100 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-base-100 p-4">
             <div className="w-full max-w-md bg-white/70 backdrop-blur-md shadow-lg rounded-2xl border border-green-200 p-8 text-center transition-transform transform hover:scale-[1.01]">
                 
                 <h1 className="text-3xl font-bold mb-4 text-green-700">🌿 My Profile</h1>

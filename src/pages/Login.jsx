@@ -11,7 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/dashboard';
 
   useEffect(() => {
     document.title = 'Login';
@@ -39,7 +39,12 @@ const Login = () => {
       .catch((err) => toast.error(err.message))
       .finally(() => setLoading(false));
   };
-
+ // ------------------ DEMO CREDENTIAL ------------------
+  const fillDemoCredentials = () => {
+    setEmail('sadiaakter8138@gmail.com');
+    setPassword('123Ab@');
+    toast.info('Demo credentials filled! 🔑');
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -97,7 +102,14 @@ const Login = () => {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
-
+  {/* ---------------- DEMO CREDENTIAL BUTTON ---------------- */}
+          <button
+            type="button"
+            onClick={fillDemoCredentials}
+            className="btn mt-3 bg-green-600 hover:bg-green-700 text-white w-full"
+          >
+            Use Demo Credentials
+          </button>
           <button
             onClick={handleGoogleLogin}
             type="button"

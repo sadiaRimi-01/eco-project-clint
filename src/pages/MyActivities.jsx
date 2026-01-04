@@ -71,7 +71,7 @@ const MyActivities = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 py-10 px-6"
+      className="min-h-screen bg-base-100 py-10 px-6"
     >
       <h1 className="md:text-4xl text-2xl font-bold text-green-700 text-center mb-10">🌿 My Eco Activities</h1>
       <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

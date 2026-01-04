@@ -6,11 +6,13 @@ import './index.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './provider/AuthProvider.jsx';
+import { ThemeProvider } from './componenets/ThemeContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -23,6 +25,8 @@ createRoot(document.getElementById('root')).render(
         pauseOnHover
         theme="light"
       />
+      </ThemeProvider>
+      
     </AuthProvider>
   </React.StrictMode>
 );

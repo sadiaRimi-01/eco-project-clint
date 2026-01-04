@@ -20,6 +20,8 @@ import MyActivitiesDetails from "../pages/MyActivitiesDetails";
 import JoinChallenge from "../pages/JoinChalleng";
 import TermsPrivacy from "../pages/TermsPrivacy";
 import About from "../pages/About";
+import DashboardLayout from "../dashboard/DashboardLayout";
+import DashboardOverview from "../dashboard/DashboardOverview";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +92,25 @@ const router = createBrowserRouter([
       { path: "forgot-password", element: <ForgetPassword /> },
     ],
   },
+  {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    { index: true, element: <DashboardOverview /> },
+    {
+      path: "activities",
+      element: <MyActivities />
+    },
+    {
+      path: "profile",
+      element: <Profile />
+    }
+  ]
+},
 ]);
 
 export default router;
